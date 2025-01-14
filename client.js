@@ -1,35 +1,38 @@
+//TCP client send message to server
 const net = require('net');
+//readline use kora hossa user input niboar jonno
 const readline = require('readline');
+//stream use kora hossa data send korar jonno
 const { Transform, Readable } = require('stream');
 
 
 
-class Encrypt extends Transform{
-  _transform(chunk,encoding,callback){
-    for(let i=0; i < chunk.length; i++){
-      if(chunk[i] !== 255){
-            chunk[i] = chunk[i] + 2
-      }
+// class Encrypt extends Transform{
+//   _transform(chunk,encoding,callback){
+//     for(let i=0; i < chunk.length; i++){
+//       if(chunk[i] !== 255){
+//             chunk[i] = chunk[i] + 2
+//       }
 
-    }
-    callback(null,chunk)
-  }
-}
+//     }
+//     callback(null,chunk)
+//   }
+// }
 // Encrypt message from client
 
 
 // Decrypt message from server
-class Decrypt extends Transform{
-  _transform(chunk,encoding,callback){
-    for(let i=0; i < chunk.length; i++){
-      if(chunk[i] !== 255){
-        chunk[i] = chunk[i] - 2
-      }
+// class Decrypt extends Transform{
+//   _transform(chunk,encoding,callback){
+//     for(let i=0; i < chunk.length; i++){
+//       if(chunk[i] !== 255){
+//         chunk[i] = chunk[i] - 2
+//       }
 
-    }
-    callback(null,chunk)
-  }
-}
+//     }
+//     callback(null,chunk)
+//   }
+// }
 // Decrypt message from server
 
 const rl = readline.createInterface({
@@ -70,7 +73,7 @@ socket.on("data", (data) => {
 })
 
 
-rl.on('line',(keybrdinput)=>{
+rl.on('line',(keybordinput)=>{
   if(clientId){
     // let encrypt = new Encrypt()
     // let readablestream = Readable.from(Buffer.from(keybrdinput,'utf-8'))
@@ -82,7 +85,7 @@ rl.on('line',(keybrdinput)=>{
     // .on('end',()=>{
     //   const encryptedMessage = Buffer.concat(enchunk).toString('utf-8');
       // Send the encrypted message to the server
-      socket.write(`${clientId} -message- ${keybrdinput}`);
+      socket.write(`${clientId} -message- ${keybordinput}`);
     // })
   }else{
     console.log('You are not yet assigned an ID by the server')
